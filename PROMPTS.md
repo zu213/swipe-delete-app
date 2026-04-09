@@ -89,3 +89,9 @@ This file tracks all prompts given to Claude for this project.
 21. **Fix deleted photos reappearing in app**
    - Bug: Deleted photos weren't being removed from the photos array, so they'd reappear
    - Fix: Remove deleted photos from photoManager.photos array after successful deletion
+
+22. **Simplify README**
+   - Update to use swipe left/swipe right terminology
+   - Remove "Requirements" section
+   - Remove "Project Structure" section
+   - Simplify "Features" section to be more barebones
