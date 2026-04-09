@@ -52,3 +52,27 @@ This file tracks all prompts given to Claude for this project.
 14. **Standardize code formatting and add documentation**
    - Convert all Swift files from 4-space to 2-space indentation
    - Create README.md with project overview, features, and structure
+
+## Session: 2026-04-09
+
+15. **Replace batch deletion with Complete button and improve UI**
+   - Remove automatic batch deletion every 10 photos
+   - Add "Complete" button in top right that becomes enabled after first deletion
+   - Make image larger/more full screen
+   - Make title and subtitle larger
+
+16. **Refine UI sizing and button placement**
+   - Make title and subtitle slightly smaller (previous change was too large)
+   - Move Complete button to bottom right
+   - Combine Complete button with pending counter into single trash icon button
+   - Show counter on the button
+
+17. **Adjust trash button design and arrow positioning**
+   - Move trash button back to top right
+   - Center the trash icon in the button (fix bad-looking offset design)
+   - Move delete/keep arrows as low as possible on screen
+
+18. **Redesign swipe indicators**
+   - Move indicators to vertical center of screen
+   - Pin delete indicator to left edge, keep indicator to right edge (10px padding)
+   - Change from arrows to chevrons

@@ -26,9 +26,8 @@ struct SwipeablePhotoCard: View {
           Image(uiImage: image)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.8)
-            .cornerRadius(20)
-            .shadow(radius: 10)
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .cornerRadius(0)
             .offset(offset)
             .rotationEffect(.degrees(Double(offset.width / 20)))
             .gesture(
@@ -87,30 +86,29 @@ struct SwipeablePhotoCard: View {
             .scaleEffect(2)
         }
 
-        // Swipe indicators at bottom
-        VStack {
+        // Swipe indicators at vertical center
+        HStack {
+          VStack {
+            Image(systemName: "chevron.left.circle.fill")
+              .font(.system(size: 40))
+              .foregroundColor(.red)
+            Text("Delete")
+              .font(.caption)
+              .foregroundColor(.red)
+          }
+          .padding(.leading, 10)
+
           Spacer()
 
-          HStack(spacing: 60) {
-            VStack {
-              Image(systemName: "arrow.left.circle.fill")
-                .font(.system(size: 40))
-                .foregroundColor(.red)
-              Text("Delete")
-                .font(.caption)
-                .foregroundColor(.red)
-            }
-
-            VStack {
-              Image(systemName: "arrow.right.circle.fill")
-                .font(.system(size: 40))
-                .foregroundColor(.green)
-              Text("Keep")
-                .font(.caption)
-                .foregroundColor(.green)
-            }
+          VStack {
+            Image(systemName: "chevron.right.circle.fill")
+              .font(.system(size: 40))
+              .foregroundColor(.green)
+            Text("Keep")
+              .font(.caption)
+              .foregroundColor(.green)
           }
-          .padding(.bottom, 50)
+          .padding(.trailing, 10)
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -24,41 +24,43 @@ struct ContentView: View {
         HStack {
           VStack(alignment: .leading, spacing: 4) {
             Text("Photo Cleanup")
-              .font(.title2)
+              .font(.title)
               .fontWeight(.bold)
               .foregroundColor(.white)
 
             if !photoManager.photos.isEmpty {
               Text("\(photoManager.photos.count - currentIndex) photos remaining")
-                .font(.caption)
+                .font(.subheadline)
                 .foregroundColor(.gray)
             }
           }
 
           Spacer()
 
-          VStack(alignment: .trailing, spacing: 4) {
-            if photosDeleted > 0 {
-              HStack {
-                Image(systemName: "trash.fill")
-                  .foregroundColor(.red)
-                Text("\(photosDeleted)")
-                  .font(.caption)
-                  .foregroundColor(.white)
+          // Trash button in top right
+          if !pendingDeletes.isEmpty {
+            Button(action: {
+              processPendingDeletes()
+            }) {
+              ZStack {
+                Circle()
+                  .fill(Color.red)
+                  .frame(width: 60, height: 60)
+
+                VStack(spacing: 2) {
+                  Image(systemName: "trash.fill")
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+
+                  Text("\(pendingDeletes.count)")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                }
               }
             }
-
-            if !pendingDeletes.isEmpty {
-              Text("Pending: \(pendingDeletes.count)")
-                .font(.caption2)
-                .foregroundColor(.orange)
-            }
+            .shadow(radius: 5)
           }
-          .padding(.horizontal, 12)
-          .padding(.vertical, 8)
-          .background(Color.white.opacity(0.1))
-          .cornerRadius(10)
-          .opacity((photosDeleted > 0 || !pendingDeletes.isEmpty) ? 1 : 0)
         }
         .padding()
 
@@ -188,11 +190,6 @@ struct ContentView: View {
               // Queue photo for deletion
               let assetToDelete = photoManager.photos[currentIndex]
               pendingDeletes.append(assetToDelete)
-
-              // Batch delete every 10 photos
-              if pendingDeletes.count >= 10 {
-                processPendingDeletes()
-              }
 
               moveToNextPhoto()
             },

@@ -42,10 +42,6 @@ swipe-photo-delete/
 └── Item.swift                     # SwiftData model (legacy/template)
 ```
 
-## Code Style
-
-This project uses 2-space indentation for all Swift files.
-
 ## License
 
 This project is open source and available for personal use.
