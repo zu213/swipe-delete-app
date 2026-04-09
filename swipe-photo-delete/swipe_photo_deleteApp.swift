@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct swipe_photo_deleteApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+  var body: some Scene {
+    WindowGroup {
+      ContentView()
     }
+  }
 }

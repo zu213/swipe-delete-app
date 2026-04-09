@@ -46,3 +46,9 @@ This file tracks all prompts given to Claude for this project.
 
 13. **Photos skipping when delete prompt appears**
    - When the delete confirmation prompt appears, photos get skipped regardless of confirm/cancel choice
+
+## Session: 2026-04-08
+
+14. **Standardize code formatting and add documentation**
+   - Convert all Swift files from 4-space to 2-space indentation
+   - Create README.md with project overview, features, and structure
