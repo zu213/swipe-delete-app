@@ -76,3 +76,16 @@ This file tracks all prompts given to Claude for this project.
    - Move indicators to vertical center of screen
    - Pin delete indicator to left edge, keep indicator to right edge (10px padding)
    - Change from arrows to chevrons
+
+19. **Add gallery navigation view**
+   - Add button/navigator to open gallery view
+   - Show thumbnail grid of all photos
+   - Allow user to tap a photo to jump to that position in the swipe queue
+
+20. **Fix index position bug after confirming deletions**
+   - Bug: When confirming deletions, currentIndex wasn't adjusted, causing photos to be skipped
+   - Fix: Adjust currentIndex by subtracting count of deleted photos that were before current position
+
+21. **Fix deleted photos reappearing in app**
+   - Bug: Deleted photos weren't being removed from the photos array, so they'd reappear
+   - Fix: Remove deleted photos from photoManager.photos array after successful deletion

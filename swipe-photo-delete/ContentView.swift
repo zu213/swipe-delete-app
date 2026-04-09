@@ -14,6 +14,7 @@ struct ContentView: View {
   @State private var showingCompletionAlert = false
   @State private var photosDeleted = 0
   @State private var pendingDeletes: [PHAsset] = []
+  @State private var showingGallery = false
 
   var body: some View {
     ZStack {
@@ -36,6 +37,18 @@ struct ContentView: View {
           }
 
           Spacer()
+
+          // Gallery button
+          if !photoManager.photos.isEmpty && currentIndex < photoManager.photos.count {
+            Button(action: {
+              showingGallery = true
+            }) {
+              Image(systemName: "square.grid.3x3")
+                .font(.system(size: 24))
+                .foregroundColor(.white)
+            }
+            .padding(.trailing, 12)
+          }
 
           // Trash button in top right
           if !pendingDeletes.isEmpty {
@@ -209,6 +222,13 @@ struct ContentView: View {
     } message: {
       Text("You've reviewed all your photos!")
     }
+    .sheet(isPresented: $showingGallery) {
+      PhotoGridView(
+        photos: photoManager.photos,
+        currentIndex: currentIndex,
+        selectedIndex: $currentIndex
+      )
+    }
   }
 
   private func moveToNextPhoto() {
@@ -227,10 +247,30 @@ struct ContentView: View {
 
   private func processPendingDeletes() {
     let assetsToDelete = pendingDeletes
+
+    // Count how many deleted photos are before the current index
+    let deletedBeforeCurrent = assetsToDelete.filter { asset in
+      if let index = photoManager.photos.firstIndex(of: asset) {
+        return index < currentIndex
+      }
+      return false
+    }.count
+
     pendingDeletes.removeAll()
 
     photoManager.batchDeletePhotos(assetsToDelete) { successCount in
       photosDeleted += successCount
+
+      // Remove deleted photos from the photos array
+      photoManager.photos.removeAll { asset in
+        assetsToDelete.contains(asset)
+      }
+
+      // Adjust current index to account for deleted photos before current position
+      currentIndex -= deletedBeforeCurrent
+      if currentIndex < 0 {
+        currentIndex = 0
+      }
     }
   }
 }
