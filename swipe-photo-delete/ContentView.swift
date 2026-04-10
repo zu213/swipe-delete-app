@@ -15,10 +15,11 @@ struct ContentView: View {
   @State private var photosDeleted = 0
   @State private var pendingDeletes: [PHAsset] = []
   @State private var showingGallery = false
+  @State private var showingDeleteConfirmation = false
 
   var body: some View {
     ZStack {
-      Color.black.edgesIgnoringSafeArea(.all)
+      Color(red: 0.11, green: 0.11, blue: 0.12).edgesIgnoringSafeArea(.all)
 
       VStack {
         // Header with progress
@@ -53,7 +54,7 @@ struct ContentView: View {
           // Trash button in top right
           if !pendingDeletes.isEmpty {
             Button(action: {
-              processPendingDeletes()
+              showingDeleteConfirmation = true
             }) {
               ZStack {
                 Circle()
@@ -221,6 +222,16 @@ struct ContentView: View {
       Button("OK", role: .cancel) { }
     } message: {
       Text("You've reviewed all your photos!")
+    }
+    .alert("Delete \(pendingDeletes.count) photo\(pendingDeletes.count == 1 ? "" : "s")?", isPresented: $showingDeleteConfirmation) {
+      Button("Clear", role: .cancel) {
+        pendingDeletes.removeAll()
+      }
+      Button("Delete", role: .destructive) {
+        processPendingDeletes()
+      }
+    } message: {
+      Text("This action cannot be undone.")
     }
     .sheet(isPresented: $showingGallery) {
       PhotoGridView(

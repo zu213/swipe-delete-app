@@ -33,7 +33,7 @@ struct PhotoGridView: View {
             }
           }
         }
-        .background(Color.black)
+        .background(Color(red: 0.11, green: 0.11, blue: 0.12))
         .onAppear {
           proxy.scrollTo(currentIndex, anchor: .center)
         }
@@ -48,7 +48,7 @@ struct PhotoGridView: View {
         }
       }
       .toolbarBackground(.visible, for: .navigationBar)
-      .toolbarBackground(Color.black, for: .navigationBar)
+      .toolbarBackground(Color(red: 0.11, green: 0.11, blue: 0.12), for: .navigationBar)
       .toolbarColorScheme(.dark, for: .navigationBar)
     }
   }

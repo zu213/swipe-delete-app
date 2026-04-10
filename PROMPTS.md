@@ -95,3 +95,13 @@ This file tracks all prompts given to Claude for this project.
    - Remove "Requirements" section
    - Remove "Project Structure" section
    - Simplify "Features" section to be more barebones
+
+23. **Add confirmation dialog for deletion**
+   - Show dialog when trash button is clicked
+   - Give option to cancel and clear pending deletions
+   - Give option to confirm and proceed with deletion
+   - If canceled, clear pending deletes and stay at current photo index
+
+24. **Change black to off-black color**
+   - Replace pure black backgrounds with softer dark gray
+   - Make app less harsh while maintaining dark theme
